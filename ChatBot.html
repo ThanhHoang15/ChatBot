@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chat Bot</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+      function InputBox () {
+        return(
+        <> 
+          <input placeholder = " Type to ask" 
+          size = "30"
+          />  
+          <button> send </button>
+        </>    
+        )
+      }
+      function Message ({message, sender}) {
+        return(
+          <div style = {{fontSize : "30px"}}>
+            {sender === "human" && 
+            <img src="./image/human.png" 
+            width = "40" 
+            alt="human" 
+            style={{ margin: "10px", position: "relative", top : "15px" }} //marginRight, marginTop...
+            />
+          }
+            {message}
+            {sender === "robot" && 
+            <img src="./image/robot.png" 
+            width = "40" 
+            alt="human" 
+            style={{ left: "19px", position : "relative", top : "15px"  }}/>}
+          </div>
+        )     
+      }
+
+      function App (){
+        return( 
+        <> 
+          <InputBox/>
+          <Message message = "hello chatbot" sender = "human"  />
+          <Message message = "hello how can i help you today?" sender = "robot"/>
+          <Message message = "what date is today?"sender = "human"/>
+          <Message message = "today is 9/11"sender = "robot"/>
+        </>
+        )
+      }
+
+      const container = document.querySelector('.js-container');
+      ReactDOM.createRoot(container).render(<App/>);
+    </script>
+  </body>
+</html>
