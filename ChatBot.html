@@ -11,7 +11,7 @@
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
-      function InputBox () {
+      function ChatInput () {
         return(
         <> 
           <input placeholder = " Type to ask" 
@@ -21,13 +21,13 @@
         </>    
         )
       }
-      function Message ({message, sender}) {
+      function ChatMessage ({message, sender}) {
         return(
           <div style = {{fontSize : "30px"}}>
-            {sender === "human" && 
+            {sender === "user" && 
             <img src="./image/human.png" 
             width = "40" 
-            alt="human" 
+            alt="user" 
             style={{ margin: "10px", position: "relative", top : "15px" }} //marginRight, marginTop...
             />
           }
@@ -35,20 +35,49 @@
             {sender === "robot" && 
             <img src="./image/robot.png" 
             width = "40" 
-            alt="human" 
+            alt="robot" 
             style={{ left: "19px", position : "relative", top : "15px"  }}/>}
           </div>
         )     
+      }
+      function ChatMessages(){
+        const chatMessages = [{
+          message: 'hello chatbot',
+          sender : 'user',
+          id: "id1"    
+        },
+        {
+          message : "hello how can i help you today?", 
+          sender : "robot",
+          id: "id2"
+        }, {
+          message : "what date is today?",
+          sender : "user",
+          id: "id3"
+        }, {
+          message : "today is 9/11",
+          sender : "robot",
+          id: "id4"
+        }
+        ] 
+        return(
+        <>
+          {chatMessages.map((chatMessageEle) => 
+            <ChatMessage
+              message = {chatMessageEle.message}
+              sender = {chatMessageEle.sender}
+              key = {chatMessageEle.id}
+            />
+          )}
+        </>
+        )
       }
 
       function App (){
         return( 
         <> 
-          <InputBox/>
-          <Message message = "hello chatbot" sender = "human"  />
-          <Message message = "hello how can i help you today?" sender = "robot"/>
-          <Message message = "what date is today?"sender = "human"/>
-          <Message message = "today is 9/11"sender = "robot"/>
+          <ChatInput/>
+          <ChatMessages/>
         </>
         )
       }
