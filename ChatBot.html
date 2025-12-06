@@ -41,7 +41,7 @@
         )     
       }
       function ChatMessages(){
-        const chatMessages = [{
+        const [chatMessages, setChatMessages] = React.useState([{
           message: 'hello chatbot',
           sender : 'user',
           id: "id1"    
@@ -58,10 +58,14 @@
           message : "today is 9/11",
           sender : "robot",
           id: "id4"
-        }
-        ] 
+        }])
+        function SendMessage (){
+          setChatMessages((prevChat) => ([...prevChat,{message: 'test', sender: 'user', id: crypto.randomUUID}])) 
+        } 
         return(
         <>
+          <button onClick = {SendMessage}>send message</button>
+
           {chatMessages.map((chatMessageEle) => 
             <ChatMessage
               message = {chatMessageEle.message}
@@ -70,7 +74,7 @@
             />
           )}
         </>
-        )
+      )
       }
 
       function App (){
