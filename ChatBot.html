@@ -2,6 +2,56 @@
 <html>
   <head>
     <title>Chat Bot</title>
+     <style>
+      .send-button{
+        height: 40px;
+        background-color: green;
+        font-size: 20px;
+        color : white;
+        padding: 0px 20px;
+        margin-left: 10px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        flex-grow: 0.025;
+      }
+      .input-box{
+        height: 40px;
+        padding: 0px 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        border: 2px solid rgb(255, 200, 200);;
+        font-size: 30px;
+        flex-grow: 1;
+        
+  
+      }
+      .chat-input-container {
+        display: flex;
+      }
+      .input-box:focus::placeholder {
+        color: transparent;   /* or opacity: 0; */
+      }
+    
+      .app-container {
+        max-width: 600px;
+        margin-left: auto; 
+        margin-right: auto;
+        
+      }
+      .input-box::placeholder {
+        color: gray;
+        font-size: 20px;
+        opacity: 1;
+      
+      }
+
+
+
+
+   
+      
+    </style> 
   </head>
   <body>
     <div class="js-container"></div>
@@ -11,6 +61,12 @@
     <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
+ 
+
+
+
+
+
       function ChatInput ({setChatMessages}) {
         const [inputText, setInputText] = React.useState('');
         
@@ -23,13 +79,15 @@
           setInputText(''); // clear box 
         } 
         return(
-        <> 
-          <input placeholder = " Type to ask" 
+        <div className = "chat-input-container"> 
+          <input 
+          className = "input-box"
+          placeholder = " Type to ask" 
           size = "30"
           onChange = {event => setInputText(event.target.value)}
           value = {inputText}/> 
-          <button onClick={SendMessage}> send </button>
-        </>    
+          <button className = "send-button" onClick={SendMessage}> send </button>
+        </div>    
         )
       }
       function ChatMessage ({message, sender}) {
@@ -88,14 +146,14 @@
         }])
 
         return( 
-        <> 
+        <div className = "app-container"> 
           <ChatInput
             chatMessages = {chatMessages}
             setChatMessages = {setChatMessages}
           />
           <ChatMessages
             chatMessages = {chatMessages}/>
-        </>
+        </div>
         )
       }
 
