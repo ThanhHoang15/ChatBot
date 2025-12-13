@@ -43,11 +43,22 @@
         color: gray;
         font-size: 20px;
         opacity: 1;
-      
       }
-
-
-
+     
+      .chat-message-user{
+        display: flex;
+        justify-content: end;
+      }
+      .chat-message-robot{
+        display: flex;
+      }
+      .chat-message-text{
+     
+        margin: 10px;
+        background-color: antiquewhite;
+        padding: 10px 20px;
+        border-radius: 20px;
+      }
 
    
       
@@ -85,27 +96,40 @@
           placeholder = " Type to ask" 
           size = "30"
           onChange = {event => setInputText(event.target.value)}
-          value = {inputText}/> 
+          value = {inputText}
+          onKeyDown={e => e.key === "Enter" && SendMessage()}
+          /> 
           <button className = "send-button" onClick={SendMessage}> send </button>
         </div>    
         )
       }
       function ChatMessage ({message, sender}) {
         return(
-          <div style = {{fontSize : "30px"}}>
-            {sender === "user" && 
-            <img src="./image/human.png" 
-            width = "40" 
-            alt="user" 
-            style={{ margin: "10px", position: "relative", top : "15px" }} //marginRight, marginTop...
-            />
-          }
-            {message}
+          <div className = {sender === 'user' ? 'chat-message-user' : 'chat-message-robot'}
+            style = {{fontSize : "30px"}}>
+            
             {sender === "robot" && 
-            <img src="./image/robot.png" 
-            width = "40" 
+            <img 
+            src="./image/robot.png" 
+            width = "40"
+            className = 'robot-image' 
             alt="robot" 
-            style={{ left: "19px", position : "relative", top : "15px"  }}/>}
+            />
+            }
+
+          
+            <div className  = 'chat-message-text'>{message}</div>
+            
+
+            
+            {sender === "user" && 
+              <img 
+              src="./image/human.png" 
+              width = "40" 
+              alt="user"     
+              />
+              }
+            
           </div>
         )     
       }
